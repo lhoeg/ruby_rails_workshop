@@ -12,6 +12,12 @@ class TopicsController < ApplicationController
   def show
   end
 
+  def upvote
+    @topic = Topic.find(params[:id])
+    @topic.votes.create
+    redirect_to(topics_path)
+  end
+
   # GET /topics/new
   def new
     @topic = Topic.new
