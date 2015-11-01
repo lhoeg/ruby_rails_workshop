@@ -190,6 +190,44 @@ You also want to avoid the uploaded files being added to your git repository, so
 
   public/uploads
 
+*Add image thumbnail on Topic index*
+
+It would also be nice to see a thumbnail on the Topic index page.
+
+Add the 'mini_magick' gem (you should know how by now).
+
+We need to tell the uploader to resize the image to a new format.
+Edit <tt>app/uploaders/picture_uploader.rb</tt>.  Uncomment the line <tt>include CarrierWave::MiniMagick</tt> and add just below:
+
+  version :thumb do
+    process :resize_to_fill => [50, 50]
+  end
+
+Edit <tt>app/views/topics/show.html.erb</tt> and add a dolumn the the table:
+
+  <th>Title</th>
+  ...
+
+to
+
+  <th>Title</th>
+  <th>Photo</th>
+  ...
+
+and
+
+  <td><%= link_to topic.title, topic %></td>
+  ...
+
+to
+
+  <td><%= link_to topic.title, topic %></td>
+  <td><%= image_tag topic.picture_url(:thumb) if topic.picture? %></td>
+  ...
+
+_Note_: Any previously uploaded images will not have this size yet, but it will happen automatically for newly uploaded images.
+The documentation will tell how to create the missing sizes/versions for existing images (hint: look for <tt>recreate_versions!</tt> method).
+
 == How to get on from here?
 
 *Learning Ruby*
