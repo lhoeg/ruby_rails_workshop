@@ -1,28 +1,62 @@
-== README
+= Ruby on Rails -- Introductory Workshop
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+October 30th 2015 - VIA University Horsens
 
-Things you may want to cover:
+See the {slides}[http://slides.com/lhoeg/deck] from this workshop.
 
-* Ruby version
+== Getting started
 
-* System dependencies
+A laptop with Ruby on Rails installed is a prequisite for this workshop.
+There are a few guides to help you install Ruby, Rails antoher tools;
 
-* Configuration
+* {RailsBridge}[http://docs.railsbridge.org/installfest/choose_your_operating_system]
 
-* Database creation
+* {RailsInstaller}[http://railsinstaller.org/en] and {SSL error workaround}[https://gist.github.com/luislavena/f064211759ee0f806c88]
 
-* Database initialization
+You will also need a good code editor; e.g. {Sublime Text 2}[http://www.sublimetext.com/2].
 
-* How to run the test suite
+== Case: Suggestotron
 
-* Services (job queues, cache servers, search engines, etc.)
+The case we used as base for the workshop is {RailsBridge}[http://docs.railsbridge.org/intro-to-rails/], starting from {Getting Started}[http://docs.railsbridge.org/intro-to-rails/getting_started].
 
-* Deployment instructions
+This project is a sample run-through of the case used in our workshop, plus a few suggestions for further development.
 
-* ...
+== More Info
 
+*Learning Ruby*
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+There are many great ressources on the internet for learning Ruby; I will point you to a few just to get a head start;
+
+* {Ruby in Twenty Minutes}[https://www.ruby-lang.org/en/documentation/quickstart/]
+
+* {TryRuby}[http://tryruby.org/]
+
+* {Why's (Poignant) Guide to Ruby}[http://poignant.guide]
+
+* RailsBridge {Ruby Language}[http://docs.railsbridge.org/intro-to-rails/ruby_language)]
+
+* {rubygems.org}[https://rubygems.org]
+
+* {Ruby5}[https://ruby5.codeschool.com]
+
+* {Ruby Tapas}[http://www.rubytapas.com]
+
+* See more on {ruby-lang.org}[https://www.ruby-lang.org/en/documentation/]
+
+*Learning Rubu on Rails*
+
+There are also a huge number of online resources, e.g.;
+
+* {Ruby on Rails}[http://rubyonrails.org]
+
+* {Ruby on Rails Guides}[http://guides.rubyonrails.org]
+
+* {RailsCasts}[http://railscasts.com]
+
+* For top gems {ruby-toolbox.com}[https://www.ruby-toolbox.com]
+
+== License
+
+This project is released under the MIT license:
+
+* http://www.opensource.org/licenses/MIT
