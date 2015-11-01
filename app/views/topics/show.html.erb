@@ -5,6 +5,8 @@
   <%= @topic.title %>
 </p>
 
+<%= image_tag(@topic.picture_url, :width => 200) if @topic.picture.present? %>
+
 <p>
   <strong>Description:</strong>
   <%= @topic.description %>

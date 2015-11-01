@@ -26,6 +26,7 @@ _Note_: If you haven't installed Node.js (or another Javascript interpreter), yo
 *Further steps: Styling with Twitter Bootstrap*
 
 Adding {Twitter Bootstrap}[http://getbootstrap.com] is a very simple way to make even a quick testing project much more appealing in a matter of seconds.
+Here we will use the {bootstrap-sass}[https://github.com/twbs/bootstrap-sass] gem.
 
 First, edit <tt>Gemfile</tt> and add:
 
@@ -126,6 +127,68 @@ We then need a few extra bits of styling to set the page right; edit <tt>/app/as
 
   body { padding-top: 60px; }
   footer { margin-top: 40px; }
+
+*Upload an image*
+
+Wouldn't it be nice if you could just upload a picture for a Topic?
+The {carrierwave}[https://github.com/carrierwaveuploader/carrierwave] gem is one option here.
+
+First, edit <tt>Gemfile</tt> and add:
+
+  gem 'carrierwave'
+
+and run <tt>bundle install</tt>.
+
+We then need to generate an Uploader (it is just a Ruby class; take a look under <tt>app/uploaders</tt>):
+
+  rails generate uploader Picture
+
+Btw, don't forget to restart the server.
+
+We also need a new field on Topic to put information about the image; let's call it *picture*.
+
+  rails g migration add_picture_to_topics picture:string
+  rake db:migrate
+
+The Topic model needs to know how to handle an uploaded image; for this we add the following line to <tt>app/models/topic.rb</tt>:
+
+  mount_uploader :picture, PictureUploader
+
+As Rails 4+ uses attribute whitelisting in hte controllers to prevent updating fields you are not allowed to, we also need to add the picture field here; open <tt>app/controllers/topics_controller.rb</tt> and near the bottom of the file change:
+
+  def topic_params
+    params.require(:topic).permit(:title, :description)
+  end
+
+to
+
+  def topic_params
+    params.require(:topic).permit(:title, :description, :picture)
+  end
+
+We then need to update the form with a file upload field, so open <tt>app/views/topics/_form.html.erb</tt> in your editor and add below the other input fields:
+
+  <div class="field">
+    <%= f.label :picture %><br>
+    <%= f.file_field :picture, accept: "image/*;capture=camera" %>
+  </div>
+
+Uploading a file via HTTP(s) requires a a multipart HTTP request, we also need to change the line at the top:
+
+  <%= form_for(@topic) do |f| %>
+
+to
+
+  <%= form_for @topic, :html => {:multipart => true} do |f| %>
+
+Oh, and we need to dhow the image also.
+Open the *show* view <tt>app/views/topics/show.html.erb</tt> and add:
+
+  <%= image_tag(@topic.picture_url, :width => 200) if @topic.picture.present? %>
+
+You also want to avoid the uploaded files being added to your git repository, so add to <tt>.gitignore</tt>:
+
+  public/uploads
 
 == How to get on from here?
 
