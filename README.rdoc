@@ -6,29 +6,35 @@ See the {slides}[http://slides.com/lhoeg/deck] from this workshop.
 
 == Getting started
 
-A laptop with Ruby on Rails installed is a prequisite for this workshop.
-There are a few guides to help you install Ruby, Rails antoher tools;
+A laptop with Ruby on Rails installed and a good code editor is a prerequisite for this workshop.
 
-* {RailsBridge}[http://docs.railsbridge.org/installfest/choose_your_operating_system]
+There are a few guides to help you install Ruby, Rails and other tools needed;
 
-* {RailsInstaller}[http://railsinstaller.org/en] and {SSL error workaround}[https://gist.github.com/luislavena/f064211759ee0f806c88]
+* {RailsBridge Installfest}[http://docs.railsbridge.org/installfest/choose_your_operating_system]
 
-You will also need a good code editor; e.g. {Sublime Text 2}[http://www.sublimetext.com/2].
+* {RailsInstaller}[http://railsinstaller.org/en] and {SSL error workaround}[https://gist.github.com/luislavena/f064211759ee0f806c88] (in case you get this error after installation)
+
+As code editor one example is {Sublime Text 2}[http://www.sublimetext.com/2].
 
 == Case: Suggestotron
 
-The case we used as base for the workshop is {RailsBridge}[http://docs.railsbridge.org/intro-to-rails/], starting from {Getting Started}[http://docs.railsbridge.org/intro-to-rails/getting_started].
+The case we used as base for the workshop is RailsBridge {Intro to Rails - Suggestotron}[http://docs.railsbridge.org/intro-to-rails/], starting from {Getting Started}[http://docs.railsbridge.org/intro-to-rails/getting_started] section.
 
-This project is a sample run-through of the case used in our workshop, plus a few suggestions for further development.
+This Github project is a quick run-through of the case used in our workshop, plus a few suggestions for further development.
 
-_Note_: If you haven't installed Node.js (or another Javascript interpreter), you may see an error; you may safely remove the <tt>javascript_include_tag</tt>-line in the application layout file <tt>app/views/layouts/application.html.erb</tt> for now.
+_Note_: If you haven't installed Node.js (or another Javascript interpreter), you may see an error.
+Remove the <tt>javascript_include_tag</tt>-line (line 6) in the application layout file <tt>app/views/layouts/application.html.erb</tt>for now if this is the case.
 
-*Further steps: Styling with Twitter Bootstrap*
+You can follow my track commit-by-commit as I walk through this guide, and making the extra additions explained below.
+
+=== Further steps
+
+==== Super Simple Styling with Twitter Bootstrap
 
 Adding {Twitter Bootstrap}[http://getbootstrap.com] is a very simple way to make even a quick testing project much more appealing in a matter of seconds.
 Here we will use the {bootstrap-sass}[https://github.com/twbs/bootstrap-sass] gem.
 
-First, edit <tt>Gemfile</tt> and add:
+First, edit your project's <tt>Gemfile</tt> and add:
 
   gem 'bootstrap-sass'
 
@@ -40,7 +46,7 @@ Then change the application css file to {scss}[http://sass-lang.com]:
 
   git mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss
 
-(you have been using git for each step, right?)
+(you have been using git for each step along the way, right?)
 
 Add to <tt>app/assets/stylesheets/application.scss</tt>:
 
@@ -54,7 +60,7 @@ and to <tt>app/assets/javascripts/application.js</tt> below <tt>//= require jque
 
 When you reload the page in your browser, you should notice the font just changed, but not a whole lot more. Yet...
 
-Remove Rails' default scaffolding stylesheet as it gets in our way!
+Remove Rails' default scaffolding stylesheet as it will get in our way!
 
   git rm app/assets/stylesheets/scaffolds.scss
 
@@ -68,7 +74,7 @@ with
     <%= yield %>
   </div>
 
-Edit your index view <tt>app/views/topics/index.html.erb</tt> and add a few Bootstrap-classes;
+Edit your index view <tt>app/views/topics/index.html.erb</tt> and add a few Bootstrap-classes; change:
 
   <table>
 
@@ -76,13 +82,15 @@ to
 
   <table class="table">
 
+and:
+
   <td><%= button_to '+1', upvote_topic_path(topic), method: :post %></td>
 
 to
 
   <td><%= button_to '+1', upvote_topic_path(topic), method: :post, class: "btn btn-success" %></td>
 
-and
+and:
 
   <%= link_to 'New Topic', new_topic_path %>
 
@@ -92,9 +100,9 @@ to
 
 Reload the page and enjoy!
 
-*Nav-bar and footer*
+==== Nav-bar and footer
 
-Edit the application layout <tt>app/views/layouts/application.html.erb</tt> and add right after the <tt>\<body\></tt> tag:
+Edit the application layout <tt>app/views/layouts/application.html.erb</tt> and add the following HTML code right after the <tt>\<body></tt> tag:
 
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
@@ -115,7 +123,7 @@ Edit the application layout <tt>app/views/layouts/application.html.erb</tt> and 
     </div>
   </nav>
 
-and just before the <tt>\</body\></tt> tag add:
+and just before the <tt>\</body></tt> tag add:
 
   <footer class="well">
     <div class="container">
@@ -123,14 +131,16 @@ and just before the <tt>\</body\></tt> tag add:
     </div>
   </footer>
 
-We then need a few extra bits of styling to set the page right; edit <tt>/app/assets/stylesheets/application.scss</tt> and add:
+We then need a few extra bits of styling to set the page right; edit <tt>/app/assets/stylesheets/application.scss</tt> and append:
 
   body { padding-top: 60px; }
   footer { margin-top: 40px; }
 
-*Upload an image*
+Refresh your browser to see the result.
 
-Wouldn't it be nice if you could just upload a picture for a Topic?
+==== Upload an image
+
+Wouldn't it be nice if you could just upload a picture to show with each Topic?
 The {carrierwave}[https://github.com/carrierwaveuploader/carrierwave] gem is one option here.
 
 First, edit <tt>Gemfile</tt> and add:
@@ -145,7 +155,7 @@ We then need to generate an Uploader (it is just a Ruby class; take a look under
 
 Btw, don't forget to restart the server.
 
-We also need a new field on Topic to put information about the image; let's call it *picture*.
+We also need a new field on Topic to put information about the image; let's call it *picture*:
 
   rails g migration add_picture_to_topics picture:string
   rake db:migrate
@@ -181,7 +191,7 @@ to
 
   <%= form_for @topic, :html => {:multipart => true} do |f| %>
 
-Oh, and we need to dhow the image also.
+Oh, and we need to show the image also.
 Open the *show* view <tt>app/views/topics/show.html.erb</tt> and add:
 
   <%= image_tag(@topic.picture_url, :width => 200) if @topic.picture.present? %>
@@ -190,9 +200,10 @@ You also want to avoid the uploaded files being added to your git repository, so
 
   public/uploads
 
-*Add image thumbnail on Topic index*
+==== Add image thumbnail on Topic index
 
 It would also be nice to see a thumbnail on the Topic index page.
+So far we the uploaded image is just saved under `public/uploads`, but we could easily add post processing such as scaling the image to different formats etc.
 
 Add the 'mini_magick' gem (you should know how by now).
 
@@ -228,9 +239,29 @@ to
 _Note_: Any previously uploaded images will not have this size yet, but it will happen automatically for newly uploaded images.
 The documentation will tell how to create the missing sizes/versions for existing images (hint: look for <tt>recreate_versions!</tt> method).
 
+==== Further improvements
+
+You may also like to add:
+
+* Style the add/edit form and show view page; maybe make add/edit/deleteback buttons display Twitter bootstrap {Glyphicons}[http://getbootstrap.com/components/#glyphicons]
+
+* User authentication using {Devise}[https://github.com/plataformatec/devise] gem, {hint}[http://guides.railsgirls.com/devise/]
+
+* Commenting using {acts_as_commentable}[https://github.com/jackdempsey/acts_as_commentable] gem
+
+* Deploy your project onto {Heroku}[https://www.heroku.com]
+
+* Multi-language using built-in `I18n` and <tt>config/locales</tt> files
+
+* User image; {Gravatar}[http://en.gravatar.com] or uploadable file
+
+* Testing!!!
+
+* ...
+
 == How to get on from here?
 
-*Learning Ruby*
+=== Learning Ruby
 
 There are many great ressources on the internet for learning the Ruby language; I'll point you to a few just to get a head start;
 
@@ -250,7 +281,7 @@ There are many great ressources on the internet for learning the Ruby language; 
 
 * See more on {ruby-lang.org}[https://www.ruby-lang.org/en/documentation/]
 
-*Learning Rubu on Rails*
+=== Learning Rubu on Rails
 
 There are also a huge number of online resources, e.g.;
 
@@ -261,6 +292,14 @@ There are also a huge number of online resources, e.g.;
 * {RailsCasts}[http://railscasts.com]
 
 * For top gems {ruby-toolbox.com}[https://www.ruby-toolbox.com]
+
+== Credits
+
+* {RailsBridge}[http://docs.railsbridge.org/]
+
+* {RailsGirls}[http://railsgirls.com]
+
+* ... and the great documentation provided by so many open source ruby gems out there!
 
 == License
 
