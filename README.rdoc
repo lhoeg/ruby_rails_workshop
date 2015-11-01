@@ -291,6 +291,10 @@ There are also a huge number of online resources, e.g.;
 
 * {RailsCasts}[http://railscasts.com]
 
+* {Rails Beginner Cheat Sheet}[http://www.pragtob.info/rails-beginner-cheatsheet/]
+
+* {Learn Ruby on Rails (book)}[https://www.railstutorial.org/book]
+
 * For top gems {ruby-toolbox.com}[https://www.ruby-toolbox.com]
 
 == Credits
