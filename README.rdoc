@@ -21,11 +21,81 @@ The case we used as base for the workshop is {RailsBridge}[http://docs.railsbrid
 
 This project is a sample run-through of the case used in our workshop, plus a few suggestions for further development.
 
-== More Info
+_Note_: If you haven't installed Node.js (or another Javascript interpreter), you may see an error; you may safely remove the <tt>javascript_include_tag</tt>-line in the application layout file <tt>app/views/layouts/application.html.erb</tt> for now.
+
+*Further steps: Styling with Twitter Bootstrap*
+
+Adding {Twitter Bootstrap}[http://getbootstrap.com] is a very simple way to make even a quick testing project much more appealing in a matter of seconds.
+
+First, edit <tt>Gemfile</tt> and add:
+
+  gem 'bootstrap-sass'
+
+and run <tt>bundle install</tt>.
+
+_Note:_ You will have to restart the Rails server after adding gems to your Gemfile.
+
+Then change the application css file to {scss}[http://sass-lang.com]:
+
+  git mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss
+
+(you have been using git for each step, right?)
+
+Add to <tt>app/assets/stylesheets/application.scss</tt>:
+
+  // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+  @import "bootstrap-sprockets";
+  @import "bootstrap";
+
+and to <tt>app/assets/javascripts/application.js</tt> below <tt>//= require jquery</tt>:
+
+  //= require bootstrap-sprockets
+
+When you reload the page in your browser, you should notice the font just changed, but not a whole lot more. Yet...
+
+Remove Rails' default scaffolding stylesheet as it gets in our way!
+
+  git rm app/assets/stylesheets/scaffolds.scss
+
+Now edit your application layout <tt>app/views/layouts/application.html.erb</tt> and replace
+
+  <%= yield %>
+
+with
+
+  <div class="container">
+    <%= yield %>
+  </div>
+
+Edit your index view <tt>app/views/topics/index.html.erb</tt> and add a few Bootstrap-classes;
+
+  <table>
+
+to
+
+  <table class="table">
+
+  <td><%= button_to '+1', upvote_topic_path(topic), method: :post %></td>
+
+to
+
+  <td><%= button_to '+1', upvote_topic_path(topic), method: :post, class: "btn btn-success" %></td>
+
+and
+
+  <%= link_to 'New Topic', new_topic_path %>
+
+to
+
+  <%= link_to 'New Topic', new_topic_path, class: "btn btn-primary" %>
+
+Reload the page and enjoy!
+
+== How to get on from here?
 
 *Learning Ruby*
 
-There are many great ressources on the internet for learning Ruby; I will point you to a few just to get a head start;
+There are many great ressources on the internet for learning the Ruby language; I'll point you to a few just to get a head start;
 
 * {Ruby in Twenty Minutes}[https://www.ruby-lang.org/en/documentation/quickstart/]
 
