@@ -2,6 +2,8 @@
 
 October 30th 2015 - VIA University Horsens
 
+By {Ásgeir Gunnarsson}[http://www.sonnur.dk] and {Lars Hoeg}[https://github.com/lhoeg].
+
 See the {slides}[http://slides.com/lhoeg/deck] from this workshop.
 
 == Getting started
@@ -241,17 +243,31 @@ The documentation will tell how to create the missing sizes/versions for existin
 
 ==== Further improvements
 
-You may also like to add:
+You may also like to improve:
 
-* Style the add/edit form and show view page; maybe make add/edit/deleteback buttons display Twitter bootstrap {Glyphicons}[http://getbootstrap.com/components/#glyphicons]
+* Styling
+  * Style the add/edit form and show view page
+  * Make add/edit/deleteback buttons display Twitter bootstrap {Glyphicons}[http://getbootstrap.com/components/#glyphicons]
+  * Wysiwyg editor for description
+  * Replace table on index page with 3-column grid display
 
-* User authentication using {Devise}[https://github.com/plataformatec/devise] gem, {hint}[http://guides.railsgirls.com/devise/]
+* Uploaded image
+  * Show default image
+  * Crop/resize image after upload
 
-* Commenting using {acts_as_commentable}[https://github.com/jackdempsey/acts_as_commentable] gem
+* Security
+  * User authentication using {Devise}[https://github.com/plataformatec/devise] gem, {hint}[http://guides.railsgirls.com/devise/]
+  * Configure email
+  * Sign-in/-up links in top nav-bar
+  * Style sign-in/-up forms
+  * User authorization (permissions)
 
-* Deploy your project onto {Heroku}[https://www.heroku.com]
+* Add commenting using {acts_as_commentable}[https://github.com/jackdempsey/acts_as_commentable] gem
 
 * Multi-language using built-in `I18n` and <tt>config/locales</tt> files
+
+* Deploy your project onto {Heroku}[https://www.heroku.com]
+  * Add SSL Certificate
 
 * User image; {Gravatar}[http://en.gravatar.com] or uploadable file
 
